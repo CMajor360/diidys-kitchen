@@ -1,0 +1,23 @@
+{
+  "name": "diidys-kitchen",
+  "version": "1.0.0",
+  "description": "Diidy's Kitchen - Authentic Nigerian Food Delivery",
+  "main": "index.html",
+  "type": "module",
+  "scripts": {
+    "dev": "npx http-server",
+    "build": "echo 'Static site - no build needed'",
+    "start": "npx http-server"
+  },
+  "keywords": [
+    "nigerian-food",
+    "food-delivery",
+    "restaurant"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@vercel/analytics": "^1.4.0"
+  },
+  "devDependencies": {}
+}
