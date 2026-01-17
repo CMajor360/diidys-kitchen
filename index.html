@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diidy's Kitchen | Authentic Nigerian Food Delivery</title>
+    <meta name="description"
+        content="Order delicious authentic Nigerian food for delivery. Fresh homemade meals prepared with love.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #2d3436;
+            background: #ffffff;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 20px 0;
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: #00b894;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;;
+        }
+
+        .logo span {
+            font-size: 32px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 35px;
+        }
+
+        nav a {
+            color: #2d3436;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #00b894;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #00b894;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+            padding: 100px 20px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '🍲';
+            position: absolute;
+            font-size: 400px;
+            opacity: 0.1;
+            right: -100px;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(-50%) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-55%) rotate(5deg);
+            }
+        }
+
+        .hero .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            flex: 1;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            animation: slideInLeft 1s ease;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero .tagline {
+            font-size: 24px;
+            margin-bottom: 15px;
+            opacity: 0.95;
+            animation: slideInLeft 1s ease 0.2s both;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 35px;
+            opacity: 0.9;
+            line-height: 1.7;
+            animation: slideInLeft 1s ease 0.3s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            animation: slideInLeft 1s ease 0.4s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 18px 40px;
+            background: white;
+            color: #00b894;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: white;
+            border: 3px solid white;
+        }
+
+        .cta-button.secondary:hover {
+            background: white;
+            color: #00b894;
+        }
+
+        .hero-image {
+            flex: 1;
+            background: white;
+            height: 450px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 180px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+            animation: slideInRight 1s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 20px;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 48px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #2d3436;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 184, 148, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #00b894;
+        }
+
+        .feature-card p {
+            color: #636e72;
+            line-height: 1.6;
+        }
+
+        /* Menu Section */
+        .menu {
+            padding: 100px 20px;
+            background: white;
+        }
+
+        .menu-intro {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+            color: #636e72;
+            font-size: 18px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .menu-item {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border-left: 4px solid #00b894;
+        }
+
+        .menu-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .menu-item h3 {
+            font-size: 24px;
+            color: #2d3436;
+        }
+
+        .menu-item .price {
+            font-size: 22px;
+            font-weight: 800;
+            color: #00b894;
+        }
+
+        .menu-item p {
+            color: #636e72;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .menu-item .spice-level {
+            display: inline-block;
+            padding: 5px 15px;
+            background: #ffe5e5;
+            color: #d63031;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* About Section */
+        .about {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+            color: white;
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about h2 {
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .about p {
+            font-size: 20px;
+            line-height: 1.9;
+            margin-bottom: 25px;
+            opacity: 0.95;
+        }
+
+        /* Order Section */
+        .order {
+            padding: 100px 20px;
+            background: #f8f9fa;
+        }
+
+        .order-content {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .order p {
+            font-size: 20px;
+            color: #636e72;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .order-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .order-method {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 25px;
+            background: white;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #2d3436;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .order-method:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0, 184, 148, 0.2);
+        }
+
+        .order-method span:first-child {
+            font-size: 40px;
+        }
+
+        /* Location Section */
+        .location {
+            padding: 100px 20px;
+            background: white;
+        }
+
+        .location-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .location-details {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 40px;
+        }
+
+        .location-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+            font-size: 18px;
+            color: #2d3436;
+            margin-bottom: 15px;
+        }
+
+        .location-item span:first-child {
+            font-size: 32px;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 20px;
+            background: #f8f9fa;
+        }
+
+        .contact-content {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .social-link {
+            width: 70px;
+            height: 70px;
+            background: #00b894;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 35px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 184, 148, 0.3);
+        }
+
+        .social-link:hover {
+            transform: translateY(-10px) scale(1.1);
+            box-shadow: 0 15px 40px rgba(0, 184, 148, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            background: #2d3436;
+            color: #b2bec3;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.98);
+                flex-direction: column;
+                align-items: center;
+                padding: 30px 0;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+                transition: left 0.3s ease;
+                gap: 0;
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            nav ul li {
+                width: 100%;
+                text-align: center;
+                padding: 15px 0;
+                border-bottom: 1px solid #e8e8e8;
+            }
+
+            nav ul li:last-child {
+                border-bottom: none;
+            }
+
+            .hero {
+                padding: 120px 20px 60px;
+            }
+
+            .hero .container {
+                flex-direction: column;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero .tagline {
+                font-size: 20px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .hero-image {
+                width: 100%;
+                height: 300px;
+                font-size: 120px;
+            }
+
+            h2 {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="#home" class="logo">
+                <span>🍲</span>
+                <span>Diidy's Kitchen</span>
+            </a>
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul id="navMenu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#order">Order</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Authentic Nigerian Food, Delivered Fresh</h1>
+                <p class="tagline">Made with Love, Served with Pride</p>
+                <p>Experience the taste of home with Diidy's Kitchen. We bring you authentic Nigerian cuisine prepaerd
+                    fresh daily and delivered right to your door.</p>
+                <div class="cta-buttons">
+                    <a href="#order" class="cta-button">Order Now</a>
+                    <a href="#menu" class="cta-button secondary">View Menu</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                🥗
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>Why Choose Diidy's Kitchen?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">👩🏾‍🍳</div>
+                    <h3>Authentic Recipes</h3>
+                    <p>Traditional Nigerian recipes passed down through generations, cooked with authentic ingredients.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚚</div>
+                    <h3>Fresh Delivery</h3>
+                    <p>Hot, fresh meals delivered straight to your door. Quality guaranteed with every order.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">❤️</div>
+                    <h3>Made With Love</h3>
+                    <p>Every dish is prepared with care and attention, just like home-cooked meals.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⭐</div>
+                    <h3>Quality Ingredients</h3>
+                    <p>We use only the finest, freshest ingredients to ensure authentic taste and quality.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu">
+        <div class="container">
+            <h2>Our Menu</h2>
+            <p class="menu-intro">Explore our selection of authentic Nigerian dishes, freshly prepared and ready for
+                delivery. All prices and availability subject to change.</p>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="menu-item-header">
+                        <h3>Jollof Rice</h3>
+                        <span class="price">$10</span>
+                    </div>
+                    <p>Our signature Jollof Rice cooked to perfection with rich tomato sauce, herbs, and spices. Served
+                        with your choice of protein.</p>
+                    <span class="spice-level">🌶️ Medium Spice</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-header">
+                        <h3>Egusi Soup</h3>
+                        <span class="price">$10</span>
+                    </div>
+                    <p>Rich melon seed soup with vegetables and assorted meat. Served with your choice of swallow (Eba,
+                        Fufu, or Pounded Yam).</p>
+                    <span class="spice-level">🌶️🌶️ Spicy</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-header">
+                        <h3>Fried Rice</h3>
+                        <span class="price">$10</span>
+                    </div>
+                    <p>Colorful Nigerian-style fried rice with mixed vegetables, curry, and thyme. Served with protein
+                        of choice.</p>
+                    <span class="spice-level">🌶️ Mild</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-header">
+                        <h3>Pepper Soup</h3>
+                        <span class="price">$10</span>
+                    </div>
+                    <p>Hot and spicy Nigerian pepper soup with assorted meat or fish. Perfect for cold days!</p>
+                    <span class="spice-level">🌶️🌶️🌶️ Very Spicy</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-header">
+                        <h3>Moi Moi</h3>
+                        <span class="price">$10</span>
+                    </div>
+                    <p>Steamed bean pudding made from blended black-eyed peas, onions, and peppers. A Nigerian Classic!
+                    </p>
+                    <span class="spice-level">🌶️ Mild</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-header">
+                        <h3>Suya</h3>
+                        <span class="price">$10</span>
+                    </div>
+                    <p>Spicy grilled meat seasoned with our special suya spice blend. An authentic street food favorite!
+                    </p>
+                    <span class="spice-level">🌶️🌶️ Spicy</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <h2>About Diidy's Kitchen</h2>
+                <p>At Diidy's Kitchen, we believe that food is more than just sustenance - it's a connection to home,
+                    culture, and tradition.</p>
+                <p>We specialize in authentic Nigerian cuisine, bringing the rich flavors and warmth of Nigerian cooking
+                    to your table. Every dish is prepared with fresh ingredients and traditional methods, ensuring that
+                    authentic taste you crave.</p>
+                <p>Whether you're craving the comfort of the Jollof rice, the richness of Egusi soup, or the spice of
+                    Pepper soup, we've got you covered. Made fresh, delivered hot, and always with love.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Section -->
+    <section id="order" class="order">
+        <div class="container">
+            <div class="order-content">
+                <h2>How to Order</h2>
+                <p>Ready to enjoy authentic Nigerian food? Here's how to place your order:</p>
+                <div class="order-methods">
+                    <div class="order-method">
+                        <span><img src="svg/phone.svg" width="24" height="auto"/></span>
+                        <span>Call or Text: +1(433) 610-7344</span>
+                    </div>
+                    <div class="order-method">
+                        <span><img src="svg/whatsapp.svg" width="24" height="auto"/></span>
+                        <span>WhatsApp: +1(433) 610-7344</span>
+                    </div>
+                    <div class="order-method">
+                        <span><img src="svg/tiktok.svg" widght="24" height="24"/></span>
+                        <span>Follow us on TikTok for daily specials!</span>
+                    </div>
+                </div>
+                <p><strong>Delivery Information: We offer fresh, hot meal delivery. Contact us for delivery areas and times!</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="location">
+        <div class="container">
+            <div class="location-content">
+                <h2>Find Us</h2>
+                <div class="location-details">
+                    <div class="location-item">
+                        <span>📍</span>
+                        <span>Address, City, State, Country.</span>
+                    </div>
+                    <div class="location-item">
+                        <span>🕐</span>
+                        <span>Operating Hours: [Add active hours here]</span>
+                    </div>
+                    <div class="location-item">
+                        <span>🚚</span>
+                        <span>Delivery & Takeaway Available!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2>Stay Connected</h2>
+                <p>Follow us on social media for daily specials, menu updates, and more!</p>
+                <div class="social-links">
+                    <a href="https://tiktok.com" class="social-link" target="_blank" title="TikTok"><img src="svg/tiktok.svg" width="24" height="24"/></a>
+                    <a href="https://wa.me/+1(433)610-7344" class="social-link" target="_blank" title="WhatsApp"><img src="svg/whatsapp.svg" width="24" height="24"/></a>
+                    <a href="tel:+1(433) 610-7344" class="social-link" title="Call Us"><img src="svg/phone.svg" width="24" height="24"/></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Diidy's Kitchen. All Rights Reserved.</p>
+        <p>Authentic Nigerian Food, Made with Love.</p>
+        <p style="margin-top: 20px; font-size: 12px; opacity: 0.7">Website created by Christian Alisiobi-Yobo.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        //Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', function () {
+            this.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        //Close menu when clicking on a link
+        document.querySelectorAll('#navMenu a').forEach(link => {
+            link.addEventListener('click', function () {
+                navMenu.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+
+        //Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
